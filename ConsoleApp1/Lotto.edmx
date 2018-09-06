@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LottoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Game" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DrawingDate" Type="datetime" Nullable="false" />
+          <Property Name="Ball1" Type="int" />
+          <Property Name="Ball2" Type="int" />
+          <Property Name="Ball3" Type="int" />
+          <Property Name="Ball4" Type="int" />
+          <Property Name="Ball5" Type="int" />
+          <Property Name="Ball6" Type="int" />
+          <Property Name="SpecialBall" Type="int" />
+          <Property Name="Multiplier" Type="int" />
+          <Property Name="Jackpot" Type="money" />
+          <Property Name="CashValue" Type="money" />
+        </EntityType>
+        <EntityType Name="URLData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="url" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Processed" Type="bit" Nullable="false" />
+          <Property Name="result" Type="nvarchar(max)" />
+          <Property Name="tsAdded" Type="datetime" Nullable="false" />
+          <Property Name="tsProcessed" Type="datetime" />
+          <Property Name="Mined" Type="bit" />
+          <Property Name="MinedDate" Type="datetime" />
+          <Property Name="Game" Type="varchar" MaxLength="50" />
+          <Property Name="DrawingDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="LottoModelStoreContainer">
+          <EntitySet Name="Results" EntityType="Self.Results" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="URLData" EntityType="Self.URLData" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LottoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LottoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Results" EntityType="LottoModel.Result" />
+          <EntitySet Name="URLDatas" EntityType="LottoModel.URLData" />
+        </EntityContainer>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Game" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DrawingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ball1" Type="Int32" />
+          <Property Name="Ball2" Type="Int32" />
+          <Property Name="Ball3" Type="Int32" />
+          <Property Name="Ball4" Type="Int32" />
+          <Property Name="Ball5" Type="Int32" />
+          <Property Name="Ball6" Type="Int32" />
+          <Property Name="SpecialBall" Type="Int32" />
+          <Property Name="Multiplier" Type="Int32" />
+          <Property Name="Jackpot" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CashValue" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="URLData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Processed" Type="Boolean" Nullable="false" />
+          <Property Name="result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tsAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tsProcessed" Type="DateTime" Precision="3" />
+          <Property Name="Mined" Type="Boolean" />
+          <Property Name="MinedDate" Type="DateTime" Precision="3" />
+          <Property Name="Game" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DrawingDate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LottoModelStoreContainer" CdmEntityContainer="LottoEntities">
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="LottoModel.Result">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="CashValue" ColumnName="CashValue" />
+                <ScalarProperty Name="Jackpot" ColumnName="Jackpot" />
+                <ScalarProperty Name="Multiplier" ColumnName="Multiplier" />
+                <ScalarProperty Name="SpecialBall" ColumnName="SpecialBall" />
+                <ScalarProperty Name="Ball6" ColumnName="Ball6" />
+                <ScalarProperty Name="Ball5" ColumnName="Ball5" />
+                <ScalarProperty Name="Ball4" ColumnName="Ball4" />
+                <ScalarProperty Name="Ball3" ColumnName="Ball3" />
+                <ScalarProperty Name="Ball2" ColumnName="Ball2" />
+                <ScalarProperty Name="Ball1" ColumnName="Ball1" />
+                <ScalarProperty Name="DrawingDate" ColumnName="DrawingDate" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="URLDatas">
+            <EntityTypeMapping TypeName="LottoModel.URLData">
+              <MappingFragment StoreEntitySet="URLData">
+                <ScalarProperty Name="DrawingDate" ColumnName="DrawingDate" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="MinedDate" ColumnName="MinedDate" />
+                <ScalarProperty Name="Mined" ColumnName="Mined" />
+                <ScalarProperty Name="tsProcessed" ColumnName="tsProcessed" />
+                <ScalarProperty Name="tsAdded" ColumnName="tsAdded" />
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="Processed" ColumnName="Processed" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
